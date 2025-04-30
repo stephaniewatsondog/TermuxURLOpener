@@ -10,31 +10,33 @@ def get_latest_url():
         response = requests.get(URL_PAGE, timeout=10)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
-            # Find <div> with "Latest URL:"
-            divs = soup.find_all("div")
-            for div in divs:
-                if "Latest URL:" in div.text:
-                    url = div.text.split("Latest URL:")[1].strip()
+            strong_tags = soup.find_all("strong")
+            for tag in strong_tags:
+                if "Latest URL:" in tag.text:
+                    url = tag.text.replace("Latest URL:", "").strip()
                     if url.startswith("http"):
-                        print(f"[INFO] Fetched new URL: {url}")
                         return url
     except Exception as e:
-        print(f"[ERROR] Failed to fetch URL: {e}")
+        print(f"[❌ ERROR] Failed to fetch URL: {e}")
     return None
 
 def open_url_on_device(url):
-    print(f"[INFO] Opening URL: {url}")
+    print(f"[✅ OPENING] URL: {url}")
     subprocess.run(["am", "start", "-a", "android.intent.action.VIEW", "-d", url])
 
 def main():
     last_url = ""
+    print("🔁 [RUNNING] Watching for new URL every 5 seconds...\n")
     while True:
+        print("🔍 Checking for new URL...")
         current_url = get_latest_url()
         if current_url and current_url != last_url:
+            print(f"🆕 New URL found: {current_url}")
             open_url_on_device(current_url)
             last_url = current_url
         else:
-            print("[INFO] No new URL found or already opened.")
+            print("⚠️ No new URL or same as last.")
+        print("⌛ Waiting 5 seconds...\n")
         time.sleep(5)
 
 if __name__ == "__main__":
