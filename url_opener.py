@@ -13,10 +13,17 @@ def log(message):
 
 def open_url(url):
     try:
-        subprocess.run(["am", "start", "-a", "android.intent.action.VIEW", "-d", url])
+        subprocess.run([
+            "am", "start", 
+            "-a", "android.intent.action.VIEW", 
+            "-d", url,
+            "--activity-clear-top",
+            "--activity-new-task"
+        ])
         log(f"✅ Opened URL: {url}")
     except Exception as e:
         log(f"❌ Failed to open URL: {e}")
+
 
 log("🚀 Termux URL Opener Started.")
 log("📡 Polling server every 5 seconds...")
