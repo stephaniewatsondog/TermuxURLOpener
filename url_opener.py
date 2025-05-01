@@ -42,7 +42,7 @@ while True:
             last_url = current_url
             open_url(current_url)
         else:
-            log("✅ No change in URL.")
+            log("✅ No change 22 in URL.")
 
     except Exception as e:
         log(f"❌ Error checking URL: {e}")
