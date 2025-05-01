@@ -20,7 +20,7 @@ while True:
             last_url = current_url
             open_url(current_url)
         else:
-            print("No new URL found.")
+            print("No new URL 22 found.")
     except Exception as e:
         print(f"Error checking URL: {e}")
     time.sleep(5)
