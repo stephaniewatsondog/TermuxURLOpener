@@ -14,15 +14,15 @@ def log(message):
 def open_url(url):
     try:
         subprocess.run([
-            "am", "start", 
-            "-a", "android.intent.action.VIEW", 
-            "-d", url,
-            "--activity-clear-top",
-            "--activity-new-task"
+            "am", "start",
+            "-a", "android.intent.action.VIEW",
+            "-n", "com.android.chrome/com.google.android.apps.chrome.Main",
+            "-d", url
         ])
         log(f"✅ Opened URL: {url}")
     except Exception as e:
         log(f"❌ Failed to open URL: {e}")
+
 
 
 log("🚀 Termux URL Opener Started.")
