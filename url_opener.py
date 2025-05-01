@@ -1,16 +1,22 @@
 import requests
 import subprocess
 import time
+from datetime import datetime
 
 server_url = "https://tools.cognitechs.org/urlopner"
 last_url = ""
 
+def log(msg):
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
+
 def open_url(url):
     try:
         subprocess.run(["am", "start", "-a", "android.intent.action.VIEW", "-d", url])
-        print(f"Opened: {url}")
+        log(f"✅ Opened URL: {url}")
     except Exception as e:
-        print(f"Failed to open URL: {e}")
+        log(f"❌ Failed to open URL: {e}")
+
+log("🚀 URL Listener Started. Polling every 5 seconds...")
 
 while True:
     try:
@@ -20,7 +26,7 @@ while True:
             last_url = current_url
             open_url(current_url)
         else:
-            print("No new URL 22 found.")
+            log("No new URL found.")
     except Exception as e:
-        print(f"Error checking URL: {e}")
+        log(f"⚠️ Error checking URL: {e}")
     time.sleep(5)
