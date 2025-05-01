@@ -4,7 +4,7 @@ from datetime import datetime
 
 server_url = "https://tools.cognitechs.org/urlopner/urlopner"
 last_url = ""
-file_path = "/sdcard/latest_url.txt"  # Tasker can read this
+file_path = "/download/latest_url.txt"  # Tasker can read this
 
 def log(message):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {message}")
