@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 # Set your server endpoint that returns the latest URL
-server_url = "https://tools.cognitechs.org/urlopner"
+server_url = "https://tools.cognitechs.org/urlopner/urlopner"
 last_url = ""
 
 def log(message):
